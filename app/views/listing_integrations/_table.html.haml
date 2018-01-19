@@ -1,0 +1,16 @@
+- if integrations.any?
+  %h4= title
+  #spinner
+  %table.table.table-striped
+    %tr
+      %th Nome
+      %th Site
+      - if status == "complete"
+        %th
+      - integrations.each do |integration|
+        %tr
+          %td= Integration::INTEGRATIONS[integration.type]
+          %td= link_to integration.listing_url, integration.listing_url, target: "_blank"
+          - if status == "complete"
+            %td
+              = link_to "x", listing_integration_path(@listing, integration), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger btn-xs"

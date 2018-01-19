@@ -1,0 +1,23 @@
+= form_for @integration.becomes(Integration) do |f|
+  .row
+    .col-sm-8.col-sm-offset-2
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :name, "Site", class: "control-label"
+          .col-sm-8
+            = f.select :name, options_for_select(Integration::INTEGRATIONS.invert, @integration.name), { include_blank: "Selecione um Site" }, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :username, "Email / Usuário", class: "control-label"
+          .col-sm-8
+            = f.text_field :username, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :password, "Senha", class: "control-label"
+          .col-sm-8
+            = f.password_field :password, class: "form-control"
+      %p.text-right
+        = f.submit "Salvar", class: "btn btn-success"

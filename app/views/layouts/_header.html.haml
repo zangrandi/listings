@@ -1,0 +1,23 @@
+%nav.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{:href => '/'}
+        = image_tag "listings-logo.png"
+    %ul.nav.navbar-nav.navbar-right
+      - if user_signed_in?
+        %li
+          = link_to "Meus Anúncios", listings_path
+        %li
+          = link_to "Minhas Integrações", integrations_path
+        %li
+          = link_to "Sair", destroy_user_session_path, method: :delete
+      - else
+        %li
+          = link_to "Registrar", new_user_registration_path
+        %li
+          = link_to "Entrar", new_user_session_path

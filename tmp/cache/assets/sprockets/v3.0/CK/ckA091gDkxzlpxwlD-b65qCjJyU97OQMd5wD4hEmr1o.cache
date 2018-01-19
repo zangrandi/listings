@@ -1,0 +1,9 @@
+I"Â(function() {
+  $(document).ready(function() {
+    var spinner, target;
+    target = document.getElementById('spinner');
+    return spinner = new Spinner({}).spin(target);
+  });
+
+}).call(this);
+:ET

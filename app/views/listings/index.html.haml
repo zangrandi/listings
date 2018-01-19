@@ -1,0 +1,30 @@
+.row
+  .col-md-10.col-md-offset-1
+    .row
+      .col-sm-8
+        %h3 Meus Anúncios
+      .col-sm-4.text-right
+        = link_to "Novo anúncio", new_listing_path, class: "btn btn-success btn-right"
+    %hr
+    %table.table.table-striped
+      %tr
+        %th Referência
+        %th Título
+        %th Transação
+        %th Tipo
+        %th Cidade
+        %th Preço
+        %th Integrações
+        %th
+      - @listings.each do |listing|
+        %tr
+          %td= listing.reference
+          %td= link_to listing.title, edit_listing_path(listing)
+          %td= listing.transaction_type
+          %td= listing.listing_type
+          %td= listing.full_address
+          %td= number_to_currency listing.price, unit: "R$ ", separator: ",", delimiter: "."
+          %td
+            .label.label-success.label-integration
+              = link_to listing.listing_integrations.published.length, listing_integrations_path(listing)
+          %td= link_to "x", listing_path(listing), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Tem certeza?" }

@@ -1,0 +1,20 @@
+.row
+  .col-md-10.col-md-offset-1
+    .row
+      .col-sm-8
+        %h3 Minhas Integrações
+      .col-sm-4.text-right
+        = link_to "Nova Integração", new_integration_path, class: "btn btn-success btn-right"
+    %hr
+    %table.table.table-striped
+      %tr
+        %th Site
+        %th Email
+        %th Senha
+        %th
+      - @integrations.each do |integration|
+        %tr
+          %td= link_to integration.site_name, edit_integration_path(integration)
+          %td= integration.username
+          %td= integration.fakepassword
+          %td= link_to "x", integration_path(integration), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: "Tem certeza?" }

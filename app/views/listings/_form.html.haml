@@ -1,0 +1,125 @@
+= form_for @listing do |f|
+  .row
+    .col-sm-6
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :title, "Título", class: "control-label"
+          .col-sm-8
+            = f.text_field :title, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :description, "Descrição", class: "control-label"
+          .col-sm-8
+            = f.text_area :description, class: "form-control", rows: 3
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :listing_type, "Tipo do Imóvel", class: "control-label"
+          .col-sm-8
+            = f.select :listing_type, options_for_select(Listing::TYPES, @listing.listing_type), { prompt: "Selecione" }, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :transaction_type, "Finalidade", class: "control-label"
+          .col-sm-8
+            = f.select :transaction_type, options_for_select(Listing::TRANSACTION_TYPES, @listing.transaction_type), { prompt: "Selecione" }, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :reference, "Código / Referência", class: "control-label"
+          .col-sm-8
+            = f.text_field :reference, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :price, "Preço", class: "control-label"
+          .col-sm-8
+            = f.text_field :price, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :bedrooms, "Quartos", class: "control-label"
+          .col-sm-8
+            = f.select :bedrooms, options_for_select(1..10, @listing.bedrooms), { include_blank: "Selecione" }, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :bathrooms, "Banheiros", class: "control-label"
+          .col-sm-8
+            = f.select :bathrooms, options_for_select(1..10, @listing.bathrooms), { include_blank: "Selecione" }, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :suites, "Suites", class: "control-label"
+          .col-sm-8
+            = f.select :suites, options_for_select(1..10, @listing.suites), { include_blank: "Selecione" }, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :parking_spaces, "Vagas", class: "control-label"
+          .col-sm-8
+            = f.select :parking_spaces, options_for_select(1..10, @listing.parking_spaces), { include_blank: "Selecione" }, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :square_feet, "Área útil (m²)", class: "control-label"
+          .col-sm-8
+            = f.text_field :square_feet, class: "form-control"
+    .col-sm-6
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :state, "Estado", class: "control-label"
+          .col-sm-8
+            = f.text_field :state, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :city, "Cidade", class: "control-label"
+          .col-sm-8
+            = f.text_field :city, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :district, "Bairro", class: "control-label"
+          .col-sm-8
+            = f.text_field :district, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :street, "Rua", class: "control-label"
+          .col-sm-8
+            = f.text_field :street, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :number, "Número", class: "control-label"
+          .col-sm-8
+            = f.text_field :number, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :complement, "Complemento", class: "control-label"
+          .col-sm-8
+            = f.text_field :complement, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :zipcode, "CEP", class: "control-label"
+          .col-sm-8
+            = f.text_field :zipcode, class: "form-control"
+      .form-group
+        .row
+          .col-sm-4
+            = f.label :phone, "Telefone", class: "control-label"
+          .col-sm-8
+            = f.text_field :phone, class: "form-control"
+      %p
+        • Preencha o máximo de campos possívels para o anúncio ser publicado na maior quantidade de sites.
+      .pull-right
+        - if @listing.new_record?
+          = f.submit "Criar e definir integrações", class: "btn btn-success"
+        - else
+          = f.submit "Atualizar", class: "btn btn-success"

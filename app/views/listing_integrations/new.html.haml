@@ -1,0 +1,49 @@
+.row
+  .col-md-10.col-md-offset-1
+    .row
+      .col-sm-8
+        %h3
+          = link_to "Meus Anúncios", listings_path
+          = "/"
+          = link_to @listing.title, edit_listing_path(@listing)
+          = "/"
+          Integrações
+    %hr
+
+    = form_for @listing, url: listing_integrations_path(@listing), method: :post do |f|
+      - if @listing.integrations_possible_to_select.any?
+        %h4 Integrações Possíveis
+        .well
+          = check_box_tag :check_all 
+          Marcar tudo
+          %hr
+          = f.fields_for :listing_integrations do |i_f|
+            .row
+              .col-md-6
+                - listing_integration = i_f.object
+                - integration = listing_integration.integration
+                = i_f.hidden_field :type, value: integration.name
+                = i_f.check_box :integration_id, { checked: listing_integration.id.present? }, integration.id
+                = integration.site_name
+              .col-md-6.text-right
+                %small
+                  Ação:
+                  = listing_integration.identifier ? "atualizar" : "criar"
+        %p
+          • Os anúncios podem demorar até 1 hora para serem publicados em todos os sites. 
+        %p
+          • Você poderá acompanhar em tempo real quais já foram publicados através da página de cada anúncio.
+
+      - if @listing.integrations_impossible_to_select.any?
+        %h4 Integrações Impossíveis
+        .well
+          - @listing.integrations_impossible_to_select.each do |integration|
+            = integration.site_name
+            = "(#{@listing.missing_fields(integration).join(",")})"
+        %p
+          • Isso ocorre porque você não inseriu detalhes suficientes para o anúncio ser cadastrado nos sites listados.
+
+      .text-right
+        = link_to "Voltar", edit_listing_path(@listing), class: "btn btn-default"
+        - if @listing.integrations_possible_to_select.any?
+          = f.submit "Publicar!", class: "btn btn-success"

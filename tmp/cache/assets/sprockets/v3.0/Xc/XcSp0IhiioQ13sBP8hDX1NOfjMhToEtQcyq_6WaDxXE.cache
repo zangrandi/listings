@@ -1,0 +1,11 @@
+I"È(function() {
+  $(document).ready(function() {
+    return $('#listing_price').priceFormat({
+      prefix: 'R$ ',
+      centsSeparator: ',',
+      thousandsSeparator: '.'
+    });
+  });
+
+}).call(this);
+:ET

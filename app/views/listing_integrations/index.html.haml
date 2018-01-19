@@ -1,0 +1,19 @@
+.row
+  .col-md-10.col-md-offset-1
+    .row
+      .col-sm-8
+        %h3
+          = link_to "Meus Anúncios", listings_path
+          = "/"
+          = @listing.title
+      .col-sm-4.text-right
+        = link_to "Ver Dados", edit_listing_path(@listing), class: "btn btn-primary btn-right"
+    %hr
+    - if @listing.listing_integrations.any?
+      = render "listing_integrations/table", integrations: @listing.integrations_completed, title: "Integrações Completas", status: "complete"
+      = render "listing_integrations/table", integrations: @listing.integrations_publishing, title: "Integrações em Criação", status: "pending"
+      = render "listing_integrations/table", integrations: @listing.integrations_updating, title: "Integrações em Atualização", status: "pending"
+      = render "listing_integrations/table", integrations: @listing.integrations_failed, title: "Integrações Falhas", status: "failed"
+    - else
+      .well.text-center
+        %h4 Nenhuma integração para esse Anúncio.
